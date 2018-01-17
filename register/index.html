@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Registro de informação no Blockchain</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>    
+    <script src="./main.js"></script>
+    <script src="./index.js"></script>    
+  </head>
+
+<body class="container-fluid">
+
+    <h1 class="page-header">Registro de informação no Blockchain</h1>
+
+    <div class="row">
+        <div>
+            <h3 class="sub-header">Informação</h3>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <table class="table" id="info-table">
+                        <tr>
+                            <td><label for="newInfo">Informação:</label> </td>
+                            <td>
+                                <input class="form-control" id="newInfo">
+                            </td>                          
+                        </tr>
+                    </table>
+                </div>
+                <a href="#" onclick="newRegister()" class="btn btn-primary">Registrar</a>
+            </form>
+        </div>
+    </div>    
+
+
+    <BR/><BR/>
+	  
+    <div class="row">
+        <div>
+            <h2 class="sub-header">Registros</h2>
+            <!--
+                <a id="refreshTransaction" href="#" class="btn btn-primary">Atualizar transações</a>          
+            -->
+            <div class="table-responsive">
+                <table class="table table-striped" id="transactions-table">
+                    <thead>
+                    <tr>
+                        <th>block#</th>
+                        <th>datetime</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody id="transactions">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+   
+  </body>
+</html>
