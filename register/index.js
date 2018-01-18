@@ -34,4 +34,3 @@ function newRegister() {
     $("#newInfo").val('');    
 }
 
-
