@@ -17,7 +17,7 @@ contract Register {
     }
 	
      /**********
-     Standard kill() function to recover funds 
+     Standard kill() 
      **********/    
     function kill() public { 
         if (msg.sender == owner)  // only allow this action if the account sending the signal is the creator / owner
