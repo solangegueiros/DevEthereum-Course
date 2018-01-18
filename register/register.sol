@@ -11,13 +11,9 @@ contract Register {
     function setInfo(bytes32 _info) public {
         info = _info;
     }
-    
-    function getInfo() public view returns (bytes32 _info) {
-        return info;
-    }
 	
      /**********
-     Standard kill() function to recover funds 
+     Standard kill() 
      **********/    
     function kill() public { 
         if (msg.sender == owner)  // only allow this action if the account sending the signal is the creator / owner
