@@ -11,10 +11,6 @@ contract Register {
     function setInfo(bytes32 _info) public {
         info = _info;
     }
-    
-    function getInfo() public view returns (bytes32 _info) {
-        return info;
-    }
 	
      /**********
      Standard kill() 
