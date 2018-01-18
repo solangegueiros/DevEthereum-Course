@@ -32,8 +32,8 @@ web3.eth.getAccounts(function(err, accs) {
 function newRegister() {    
     info = $("#newInfo").val();
     //alert (info);
-    contract.setInfo (info, {from:web3.eth.accounts[0], gas: 1000000}); 
-    $("#newInfo").val('');
+    contract.setInfo (info, {from:web3.eth.accounts[0], gas: 1000000});
+    $("#newInfo").val('');    
 }
 
 

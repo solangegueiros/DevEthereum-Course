@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html >
   <head>
-    <title>Registro de informação no Blockchain</title>
+    <title>Publishing information in Blockchain</title>
 
     <!-- Bootstrap core CSS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -15,23 +15,24 @@
 
 <body class="container-fluid">
 
-    <h1 class="page-header">Registro de informação no Blockchain</h1>
+    <h1 class="page-header">Publishing information in Blockchain</h1>
 
     <div class="row">
         <div>
-            <h3 class="sub-header">Informação</h3>
             <form class="form-inline" role="form">
+                <BR/><BR/>
+                
                 <div class="form-group">
                     <table class="table" id="info-table">
                         <tr>
-                            <td><label for="newInfo">Informação:</label> </td>
+                            <td><label for="newInfo">Information:</label> </td>
                             <td>
                                 <input class="form-control" id="newInfo">
                             </td>                          
                         </tr>
                     </table>
                 </div>
-                <a href="#" onclick="newRegister()" class="btn btn-primary">Registrar</a>
+                <a href="#" onclick="newRegister()" class="btn btn-primary">Save</a>
             </form>
         </div>
     </div>    
@@ -41,7 +42,7 @@
 	  
     <div class="row">
         <div>
-            <h2 class="sub-header">Registros</h2>
+            <h2 class="sub-header">Records</h2>
             <!--
                 <a id="refreshTransaction" href="#" class="btn btn-primary">Atualizar transações</a>          
             -->
@@ -49,8 +50,8 @@
                 <table class="table table-striped" id="transactions-table">
                     <thead>
                     <tr>
-                        <th>block#</th>
-                        <th>datetime</th>
+                        <th>Block#</th>
+                        <th>Date / time</th>
                         <th>Info</th>
                     </tr>
                     </thead>
