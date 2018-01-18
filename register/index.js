@@ -1,6 +1,5 @@
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-// Código para interagir com o contrato
 var accounts;
 var account;
 
@@ -11,15 +10,14 @@ var abi = JSON.parse( '[ { "constant": false, "inputs": [], "name": "register", 
 baseContract = web3.eth.contract(abi);
 contract = baseContract.at(contractAddress);
 
-// Busca contas
 web3.eth.getAccounts(function(err, accs) {
     if (err != null) {
-        alert("Ocorreu um erro ao buscar suas contas.");
+        alert("Error searching accounts.");
         return;
     }
 
     if (accs.length == 0) {
-        alert("Nenhuma conta encontrada! Verifique se o Ethereum client está configurado corretamente.");
+        alert("No account! Check if Ethereum client is set correctly.");
         return;
     }
 
