@@ -1,0 +1,17 @@
+{
+  "name": "register",
+  "version": "1.0.0",
+  "description": "Publishing information in Blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Blockchain",
+    "Ethereum"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "web3": "^0.20.0"
+  }
+}

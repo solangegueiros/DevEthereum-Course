@@ -5,12 +5,15 @@ contract Register {
     address public owner;
     string private info;
 
+    event InfoChanged(string _info);
+
     constructor() public {
         owner = msg.sender;
     }
 
     function setInfo(string _info) public {
         info = _info;
+        emit InfoChanged(_info);
     }
 
     function getInfo() public view returns (string) {

@@ -7,21 +7,16 @@
     <!-- Bootstrap core CSS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>    
-    <script src="./main.js"></script>
-    <script src="./index.js"></script>    
   </head>
   <body class="container">
 
     <h1 class="page-header text-center">Publishing information in Blockchain</h1>
     <br />
 
-    <form class="form" role="form" onsubmit="newRegister()">
+    <form class="form" role="form" onsubmit="newRegister(event)">
       <div class="form-group">
         <label for="newInfo">Information</label>
-        <input type="text" id="newInfo" class="form-control" required="" autofocus="" />
+        <input type="text" id="newInfo" name="info" class="form-control" required="" autofocus="" />
       </div>
       <button class="btn btn-primary" type="submit">Save</button>
     </form>
@@ -44,5 +39,7 @@
       </table>
     </div>
    
+    <script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>    
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
