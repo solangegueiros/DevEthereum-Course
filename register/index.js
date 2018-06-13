@@ -1,8 +1,8 @@
 var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
 
 var defaultAccount;
-var contractAddress = "0x6d3704f35a49f5027323D9B526EE69007a124dE6";
-var abi = JSON.parse('[ { "constant": false, "inputs": [], "name": "kill", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getInfo", "outputs": [ { "name": "", "type": "string", "value": "teste evento" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xe29c9ae4e6ea590a34b008954289a3b5da9afe36" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_info", "type": "string" } ], "name": "setInfo", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "_info", "type": "string" } ], "name": "InfoChanged", "type": "event" } ]');
+var contractAddress = "0x4fbc2faebd465ad79f34e08a7965c66038826e59";
+var abi = JSON.parse('[{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_info","type":"string"},{"indexed":false,"name":"_sender","type":"address"}],"name":"InfoChanged","type":"event"},{"constant":false,"inputs":[{"name":"_info","type":"string"}],"name":"setInfo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getInfo","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 RegisterContract = web3.eth.contract(abi);
 Register = RegisterContract.at(contractAddress);
@@ -37,13 +37,40 @@ function newRegister(event) {
 }
 
 // Watches the event InfoChanged
-function watchEvent() {
-    var infoEvent = Register.InfoChanged();
-    infoEvent.watch((err, result) => {
-        if (! err) {
-            console.log(result);
-        } else {
-            console.log(err);
-        }
-    });
+var events = [];
+var infoEvent = Register.InfoChanged();
+infoEvent.watch((error, result) => {
+    if (! error) {
+        events.push({
+            blockNumber: result.blockNumber,
+            date: getDateFromBlock(result.blockNumber),
+            account: result.args._sender,
+            info: result.args._info
+        });
+
+        var tableBody = document.querySelector("#transactions");
+        tableBody.innerHTML = renderedTableLines(events);
+    } else {
+        console.log(error);
+    }
+});
+
+// Returns the approximate date and time
+function getDateFromBlock(blockNumber) {
+    var timestamp = web3.eth.getBlock(blockNumber).timestamp;
+    var date = new Date(timestamp * 1000);
+
+    return date.toLocaleString();
+}
+
+// Just a facility
+function renderedTableLines(events) {
+    return events.map(event => `
+        <tr>
+            <td>${event.blockNumber}</td>
+            <td>${event.date}</td>
+            <td>${event.account}</td>
+            <td>${event.info}</td>
+        </tr>
+    `).join("");
 }
