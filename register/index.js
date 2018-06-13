@@ -1,12 +1,13 @@
-var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 
 var defaultAccount;
-var contractAddress = "0x4fbc2faebd465ad79f34e08a7965c66038826e59";
+var contractAddress = "0xcfd880f39b00d5c94dfdec1cf7529585b4767089";
 var abi = JSON.parse('[{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_info","type":"string"},{"indexed":false,"name":"_sender","type":"address"}],"name":"InfoChanged","type":"event"},{"constant":false,"inputs":[{"name":"_info","type":"string"}],"name":"setInfo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getInfo","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 RegisterContract = web3.eth.contract(abi);
 Register = RegisterContract.at(contractAddress);
 
+// Checks if exists accounts and gets the first one
 web3.eth.getAccounts(function(err, accounts) {
     if (err != null) {
         //alert("Error searching accounts.");
@@ -36,8 +37,29 @@ function newRegister(event) {
     event.target.elements['info'].focus(); 
 }
 
-// Watches the event InfoChanged
+// Working with events
 var events = [];
+
+// Gets the InfoChanged event history
+Register
+    .InfoChanged({}, {fromBlock: 0, toBlock: 'latest'})
+    .get((error, history) => {
+        if (! error) {
+            history.forEach(function(event) {
+                events.push({
+                    blockNumber: event.blockNumber,
+                    date: getDateFromBlock(event.blockNumber),
+                    account: event.args._sender,
+                    info: event.args._info
+                });
+                updateTableBody(events);
+            });
+        } else {
+            console.log(error);
+        }
+    });
+
+// Watches the event InfoChanged
 var infoEvent = Register.InfoChanged();
 infoEvent.watch((error, result) => {
     if (! error) {
@@ -47,9 +69,7 @@ infoEvent.watch((error, result) => {
             account: result.args._sender,
             info: result.args._info
         });
-
-        var tableBody = document.querySelector("#transactions");
-        tableBody.innerHTML = renderedTableLines(events);
+        updateTableBody(events);
     } else {
         console.log(error);
     }
@@ -61,6 +81,12 @@ function getDateFromBlock(blockNumber) {
     var date = new Date(timestamp * 1000);
 
     return date.toLocaleString();
+}
+
+// Updates the table
+function updateTableBody(events) {
+    var tableBody = document.querySelector("#transactions");
+    tableBody.innerHTML = renderedTableLines(events);
 }
 
 // Just a facility
