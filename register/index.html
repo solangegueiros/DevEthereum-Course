@@ -1,67 +1,46 @@
 <!DOCTYPE html>
-<html >
+<html>
   <head>
+    <meta charset="UTF-8">
     <title>Publishing information in Blockchain</title>
 
     <!-- Bootstrap core CSS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>    
-    <script src="./main.js"></script>
-    <script src="./index.js"></script>    
   </head>
+  <body class="container">
 
-<body class="container-fluid">
+    <h1 class="page-header text-center">Publishing information in Blockchain</h1>
+    <br />
 
-    <h1 class="page-header">Publishing information in Blockchain</h1>
+    <form class="form" role="form" onsubmit="newRegister(event)">
+      <div class="form-group">
+        <label for="newInfo">Information</label>
+        <input type="text" id="newInfo" name="info" class="form-control" required="" autofocus="" />
+      </div>
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
 
-    <div class="row">
-        <div>
-            <form class="form-inline" role="form">
-                <BR/><BR/>
-                
-                <div class="form-group">
-                    <table class="table" id="info-table">
-                        <tr>
-                            <td><label for="newInfo">Information:</label> </td>
-                            <td>
-                                <input class="form-control" id="newInfo">
-                            </td>                          
-                        </tr>
-                    </table>
-                </div>
-                <a href="#" onclick="newRegister()" class="btn btn-primary">Save</a>
-            </form>
-        </div>
-    </div>    
-
-
-    <BR/><BR/>
-	  
-    <div class="row">
-        <div>
-            <h2 class="sub-header">Records</h2>
-            <!--
-                <a id="refreshTransaction" href="#" class="btn btn-primary">Atualizar transações</a>          
-            -->
-            <div class="table-responsive">
-                <table class="table table-striped" id="transactions-table">
-                    <thead>
-                    <tr>
-                        <th>Block#</th>
-                        <th>Date / time</th>
-                        <th>Info</th>
-                    </tr>
-                    </thead>
-                    <tbody id="transactions">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <br />
+    <br />
+    
+    <h2 class="sub-header">Records</h2>
+  
+    <div id="transaction-list-view">
+      <table class="table table-hover table-bordered" id="transactions-table">
+        <thead>
+          <tr>
+            <th># BLOCK</th>
+            <th>DATE / TIME</th>
+            <th>ACCOUNT</th>
+            <th>INFO</th>
+          </tr>
+        </thead>
+        <tbody id="transactions"></tbody>
+      </table>
     </div>
-
    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
